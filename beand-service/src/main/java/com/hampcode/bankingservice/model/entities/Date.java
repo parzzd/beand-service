@@ -20,6 +20,6 @@ public class Date {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "day", nullable = false)
-    private String day;
+    @Column(name = "day_name", nullable = false)
+    private String dayName;
 }

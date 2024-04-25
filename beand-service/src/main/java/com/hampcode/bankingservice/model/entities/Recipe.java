@@ -19,10 +19,10 @@ public class Recipe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "owner_name", nullable = false)
-    private String ownerName;
-    @Column(name = "onwer_ingredients", nullable = false)
-    private String ownerIngredients;
-    @Column(name = "owner_description", nullable = false)
-    private String ownerDescription;
+    @Column(name = "recipe_name", nullable = false)
+    private String recipeName;
+    @Column(name = "recipe_ingredients", nullable = false)
+    private String recipeIngredients;
+    @Column(name = "recipe_description", nullable = false)
+    private String recipeDescription;
 }

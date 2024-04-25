@@ -1,8 +1,6 @@
 package com.hampcode.bankingservice.model.entities;
 
-import java.time.LocalDateTime;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,24 +13,21 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "appointments")
+@Table(name = "mealplans")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Appointment{
-
+public class MealPlan {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-   
-    @Column(name = "created_date", nullable = false)
-    private LocalDateTime createdDate;
-   
-    @Column(name = "due_date", nullable = false)
-    private LocalDateTime dueDate;
-
     @ManyToOne
-    @JoinColumn(name ="source_account_id",nullable = false)
-    private User sourceUser;
-    
+    @JoinColumn(name ="person_id",nullable = false)
+    private Person personUser;
+    @ManyToOne
+    @JoinColumn(name ="day_id",nullable = false)
+    private Date day;
+    @ManyToOne
+    @JoinColumn(name ="recipe_id",nullable = false)
+    private Recipe recipe;
 }

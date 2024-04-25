@@ -1,7 +1,5 @@
 package com.hampcode.bankingservice.model.entities;
 
-import java.time.LocalDateTime;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,24 +13,32 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "appointments")
+@Table(name = "persons")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Appointment{
+public class Person{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
    
-    @Column(name = "created_date", nullable = false)
-    private LocalDateTime createdDate;
+    @Column(name = "owner_name", nullable = false)
+    private String ownerName;
    
-    @Column(name = "due_date", nullable = false)
-    private LocalDateTime dueDate;
+    @Column(name = "owner_last_name", nullable = false)
+    private String ownerLastName;
+
+    @Column(name = "owner_age", nullable = false)
+    private int ownerAge;
+    @Column(name = "owner_weight", nullable = false)
+    private float ownerWeight;
+    @Column(name = "owner_height", nullable = false)
+    private float ownerHeight;
 
     @ManyToOne
     @JoinColumn(name ="source_account_id",nullable = false)
     private User sourceUser;
+    
     
 }
