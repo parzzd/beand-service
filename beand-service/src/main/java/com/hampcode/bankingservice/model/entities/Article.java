@@ -20,8 +20,8 @@ public class Article {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "article_qualification", nullable = false)
-    private String articleQualification;
+    @Column(name = "article_title", nullable = false)
+    private String articleTitle;
 
     @Column(name = "article_description", nullable = false)
     private String articleDescription;
