@@ -1,8 +1,9 @@
 package com.hampcode.bankingservice.services;
 
-import java.time.LocalDate;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,25 +38,48 @@ public class AccountService {
 
     @Transactional
     public AccountResponseDTO createAccount(AccountRequestDTO accountRequestDTO){
+
+        String encryptedPassword = encryptPassword(accountRequestDTO.getPassword());
+
         Account account = accountMapper.convertToEntity(accountRequestDTO);
-        account.setCreatedAt(LocalDate.now());
+        account.setTypeAccount(accountRequestDTO.getTypeAccount());
+        account.setOwnerEmail(accountRequestDTO.getOwnerEmail());
+        account.setPassword(encryptedPassword);
         accountRepository.save(account);
         return accountMapper.convertToDTO(account);
     }
 
     @Transactional
-    public AccountResponseDTO updateAccount(Long id, AccountRequestDTO accountRequestDTO){
+    public AccountResponseDTO updateAccount(Long id, AccountRequestDTO accountRequestDTO) {
         Account account = accountRepository.findById(id)
-                .orElseThrow(()-> new ResourceNotFoundException("Cuesta no encontrada con el numero:"+id));
+                .orElseThrow(() -> new ResourceNotFoundException("Cuenta no encontrada con el número:" + id));
 
-
+        account.setTypeAccount(accountRequestDTO.getTypeAccount());
         account.setOwnerEmail(accountRequestDTO.getOwnerEmail());
-        account.setOwnerEmail(accountRequestDTO.getPassword());
-        account.setUpdatedAt(LocalDate.now());
 
-        account = accountRepository.save(account);
+        if (accountRequestDTO.getPassword() != null && !accountRequestDTO.getPassword().isEmpty()) {
+            String encryptedPassword = encryptPassword(accountRequestDTO.getPassword());
+            account.setPassword(encryptedPassword);
+        }
 
-        return  accountMapper.convertToDTO(account);
+        accountRepository.save(account);
+
+        return accountMapper.convertToDTO(account);
+    }
+
+    private String encryptPassword(String password) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        return passwordEncoder.encode(password);
+    }
+
+    @Autowired
+    public boolean authenticate(String ownerEmail, String password) {
+        
+        Account account = accountRepository.findByOwnerEmail(ownerEmail)
+                .orElseThrow(() -> new ResourceNotFoundException("Cuenta no encontrada para el correo electrónico: " + ownerEmail));
+
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        return passwordEncoder.matches(password, account.getPassword());
     }
 
     @Transactional
