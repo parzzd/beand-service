@@ -41,5 +41,7 @@ public class Nutritionist{
     @JoinColumn(name ="source_account_id",nullable = false)
     private User sourceUser;
 
-
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 }
