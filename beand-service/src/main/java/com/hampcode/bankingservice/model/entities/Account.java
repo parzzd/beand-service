@@ -25,10 +25,6 @@ public class Account {
     private String typeAccount;
     @Column(name = "owner_email", nullable = false)
     private String ownerEmail;
-    @Column(name = "created_at")
-    private LocalDate createdAt;
-    @Column(name = "update_at")
-    private LocalDate updatedAt;
     @Column(name = "password", nullable = false)
     private String password;
 }

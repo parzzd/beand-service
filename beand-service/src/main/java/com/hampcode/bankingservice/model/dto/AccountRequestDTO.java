@@ -14,9 +14,11 @@ public class AccountRequestDTO {
 
     @Pattern(regexp = "^(user|nutricionist)$", message = "El tipo de cuenta debe ser 'user' o 'nutricionist'")
     private String typeAccount;
+
     @NotBlank(message = "El correo electronico del titular no puede estar vacio")
     @Email
     private String ownerEmail;
+    
     @NotBlank(message = "La contraseña no puede estar vacía")
     private String password;
 }
