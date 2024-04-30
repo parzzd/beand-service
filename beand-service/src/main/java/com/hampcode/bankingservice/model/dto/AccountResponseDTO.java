@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 public class AccountResponseDTO {
 
     private Long id;
-    private String type_account;
+    private String typeAccount;
     private String ownerEmail;
     private String password;
 }

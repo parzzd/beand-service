@@ -22,7 +22,7 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "type_account", nullable = false)
-    private String type_account;
+    private String typeAccount;
     @Column(name = "owner_email", nullable = false)
     private String ownerEmail;
     @Column(name = "created_at")

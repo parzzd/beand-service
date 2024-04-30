@@ -1,10 +1,12 @@
 package com.hampcode.bankingservice.repository;
 
-import com.hampcode.bankingservice.model.entities.Account;
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.Optional;
+import com.hampcode.bankingservice.model.entities.Account;
 
 public interface AccountRepository extends JpaRepository<Account,Long> {
     Optional<Account> findByAccountNumber(String accountNumber);
+    Optional<Account> findByOwnerEmail(String ownerEmail);
 }
