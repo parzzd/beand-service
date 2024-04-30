@@ -21,6 +21,8 @@ public class Account {
     private String accountNumber;
     @Column(name = "balance", nullable = false)
     private BigDecimal balance;
+    @Column(name = "type_account", nullable = false)
+    private String type_account;
     @Column(name = "owner_name", nullable = false)
     private String ownerName;
     @Column(name = "owner_email", nullable = false)

@@ -19,6 +19,8 @@ public class AccountRequestDTO {
     @NotNull(message = "El saldo no puede estar vacio")
     private BigDecimal balance;
 
+    @NotBlank(message = "Se debe elegir el tipo de cuenta")
+    private String type_account;
     @NotBlank(message = "El nombre del titular no puede estar vacío")
     private String ownerName;
     @NotBlank(message = "El correo electronico del titular no puede estar vacio")
