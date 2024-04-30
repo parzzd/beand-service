@@ -1,17 +1,19 @@
 package com.hampcode.bankingservice.services;
 
+import java.time.LocalDate;
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.hampcode.bankingservice.exceptions.ResourceNotFoundException;
 import com.hampcode.bankingservice.mapper.AccountMapper;
 import com.hampcode.bankingservice.model.dto.AccountRequestDTO;
 import com.hampcode.bankingservice.model.dto.AccountResponseDTO;
 import com.hampcode.bankingservice.model.entities.Account;
 import com.hampcode.bankingservice.repository.AccountRepository;
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
-import java.util.List;
+import lombok.AllArgsConstructor;
 
 @Service
 @AllArgsConstructor
@@ -46,10 +48,9 @@ public class AccountService {
         Account account = accountRepository.findById(id)
                 .orElseThrow(()-> new ResourceNotFoundException("Cuesta no encontrada con el numero:"+id));
 
-        account.setAccountNumber(accountRequestDTO.getAccountNumber());
-        account.setBalance(accountRequestDTO.getBalance());
-        account.setOwnerName(accountRequestDTO.getOwnerName());
+
         account.setOwnerEmail(accountRequestDTO.getOwnerEmail());
+        account.setOwnerEmail(accountRequestDTO.getPassword());
         account.setUpdatedAt(LocalDate.now());
 
         account = accountRepository.save(account);
