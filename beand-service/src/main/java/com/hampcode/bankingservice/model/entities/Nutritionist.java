@@ -24,22 +24,22 @@ public class Nutritionist{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-   
+
     @Column(name = "owner_name", nullable = false)
     private String ownerName;
-   
+    
     @Column(name = "owner_last_name", nullable = false)
     private String OwnerLastName;
 
     @Column(name = "owner_career", nullable = false)
     private String ownerCareer;
     
-    @Column(name = "owner_cv", nullable = false)
-    private Blob ownerCv;
+    /* @Column(name = "owner_cv", nullable = false)
+    private Blob ownerCv; */
     
-    @ManyToOne
-    @JoinColumn(name ="source_account_id",nullable = false)
-    private User sourceUser;
+    /*  @ManyToOne
+    @JoinColumn(name ="source_account_id",nullable = true)
+    private User sourceUser; */
 
 
 }

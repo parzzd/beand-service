@@ -7,6 +7,5 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.Optional;
 
 public interface AccountRepository extends JpaRepository<Account,Long> {
-    @Query("SELECT t FROM ")
     Optional<Account> findByAccountNumber(String accountNumber);
 }
