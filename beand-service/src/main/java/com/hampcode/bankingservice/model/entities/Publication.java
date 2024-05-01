@@ -1,4 +1,4 @@
-package com.hampcode.bankingservice.model.entities;
+/* package com.hampcode.bankingservice.model.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -35,3 +35,4 @@ public class Publication {
     @JoinColumn(name = "source_article_id", nullable = false)
     private Article sourceArticle;
 }
+ */
