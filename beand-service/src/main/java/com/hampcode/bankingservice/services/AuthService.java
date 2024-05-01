@@ -1,6 +1,5 @@
 package com.hampcode.bankingservice.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -14,16 +13,15 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class AuthService {
 
-    @Autowired
-    private AccountRepository accountRepository;
+    private final AccountRepository accountRepository;
 
-    public boolean authenticate(String ownerEmail, String password) {
-        // Buscar la cuenta por el correo electrónico del titular
+    public boolean authenticate(String ownerEmail, String password, String typeAccount) {
+        
         Account account = accountRepository.findByOwnerEmail(ownerEmail)
                 .orElseThrow(() -> new ResourceNotFoundException("Cuenta no encontrada para el correo electrónico: " + ownerEmail));
 
-        // Verificar la contraseña
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         return passwordEncoder.matches(password, account.getPassword());
-    }
+    } 
+
 }

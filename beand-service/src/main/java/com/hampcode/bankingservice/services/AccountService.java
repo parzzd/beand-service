@@ -2,6 +2,7 @@ package com.hampcode.bankingservice.services;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -72,7 +73,7 @@ public class AccountService {
         return passwordEncoder.encode(password);
     }
 
-    @Autowired
+/*     @Autowired
     public boolean authenticate(String ownerEmail, String password) {
         
         Account account = accountRepository.findByOwnerEmail(ownerEmail)
@@ -80,7 +81,7 @@ public class AccountService {
 
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         return passwordEncoder.matches(password, account.getPassword());
-    }
+    } */
 
     @Transactional
     public  void deleteAccount(Long id){

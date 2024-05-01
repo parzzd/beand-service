@@ -1,26 +1,34 @@
+package com.hampcode.bankingservice.controllers;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hampcode.bankingservice.model.dto.AccountRequestDTO;
-import com.hampcode.bankingservice.services.AccountService;
+import com.hampcode.bankingservice.services.AuthService;
+
+import lombok.AllArgsConstructor;
 
 @RestController
+@RequestMapping("/login")
+@AllArgsConstructor
 public class AuthController {
 
     @Autowired
-    private final AccountService accountService;
+    private AuthService authservice;
 
-    @PostMapping("/login")
-    public ResponseEntity<String> login(@Validated @RequestBody AccountRequestDTO accountDTO) {
-        String ownerEmail = accountDTO.getOwnerEmail();
-        String password = accountDTO.getPassword();
+    @PostMapping
+    public ResponseEntity<String> login(@RequestBody AccountRequestDTO loginRequest) {
 
-        boolean isAuthenticated = accountService.authenticate(ownerEmail, password);
+        String ownerEmail = loginRequest.getOwnerEmail();
+        String password = loginRequest.getPassword();
+        String typeAccount = loginRequest.getTypeAccount();
+
+        boolean isAuthenticated = authservice.authenticate(ownerEmail, password, typeAccount);
 
         if (isAuthenticated) {
             return new ResponseEntity<>("Inicio de sesión exitoso", HttpStatus.OK);
@@ -28,4 +36,8 @@ public class AuthController {
             return new ResponseEntity<>("Credenciales inválidas", HttpStatus.UNAUTHORIZED);
         }
     }
+
+    
+
 }
+
