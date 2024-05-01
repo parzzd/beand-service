@@ -23,4 +23,6 @@ public class User {
     private String ownerEmail;
     @Column(name = "owner_password", nullable = false)
     private String ownerPassword;
+    @Column(name = "cant_notifications")
+    private int cantNotifications; 
 }

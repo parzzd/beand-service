@@ -28,10 +28,4 @@ public class Publication {
     @Column(name = "publication_description", nullable = false)
     private String publicationDescription;
 
-    @OneToOne
-    @JoinColumn(name = "source_account_id", nullable = false)
-    private User sourceUser;
-
-    @JoinColumn(name = "source_article_id", nullable = false)
-    private Article sourceArticle;
 }

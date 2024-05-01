@@ -6,7 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,17 +18,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Notification {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "notifications_description", nullable = false)
+    @Column(name = "notification_description", nullable = false)
     private String notificationDescription;
 
-    @OneToOne
-    @JoinColumn(name = "source_account_id", nullable = false)
-    private User sourceUser;
-
+    @ManyToOne
     @JoinColumn(name = "source_publication_id", nullable = false)
-    private Publication sourcePublication;
+    private Publication sourcePublication; 
 }
