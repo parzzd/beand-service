@@ -1,25 +1,23 @@
 package com.hampcode.bankingservice.model.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
+
 @Data
-@Entity
-@Table(name = "ingredients")
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "ingredients")
+@Entity
 public class Ingredient {
-    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @Column(name = "Id")
     private Long id;
-    @Column(name = "ingredient_name", nullable = false)
-    private String ingredient_name;
+    @Column(name = "ingredient_name")
+    private String ingredientName;
 
 }

@@ -1,31 +1,33 @@
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+// package com.hampcode.bankingservice.controllers;
 
-import com.hampcode.bankingservice.model.dto.AccountRequestDTO;
-import com.hampcode.bankingservice.services.AccountService;
+// import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.http.HttpStatus;
+// import org.springframework.http.ResponseEntity;
+// import org.springframework.validation.annotation.Validated;
+// import org.springframework.web.bind.annotation.PostMapping;
+// import org.springframework.web.bind.annotation.RequestBody;
+// import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-public class AuthController {
+// import com.hampcode.bankingservice.model.dto.AccountRequestDTO;
+// import com.hampcode.bankingservice.services.AccountService;
 
-    @Autowired
-    private final AccountService accountService;
+// @RestController
+// public class AuthController {
 
-    @PostMapping("/login")
-    public ResponseEntity<String> login(@Validated @RequestBody AccountRequestDTO accountDTO) {
-        String ownerEmail = accountDTO.getOwnerEmail();
-        String password = accountDTO.getPassword();
+    
+//     AccountService accountService;
 
-        boolean isAuthenticated = accountService.authenticate(ownerEmail, password);
+//     @PostMapping("/login")
+//     public ResponseEntity<String> login(@Validated @RequestBody AccountRequestDTO accountDTO) {
+//         String ownerEmail = accountDTO.getOwnerEmail();
+//         String password = accountDTO.getPassword();
 
-        if (isAuthenticated) {
-            return new ResponseEntity<>("Inicio de sesión exitoso", HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>("Credenciales inválidas", HttpStatus.UNAUTHORIZED);
-        }
-    }
-}
+//         boolean isAuthenticated = accountService.authenticate(ownerEmail, password);
+
+//         if (isAuthenticated) {
+//             return new ResponseEntity<>("Inicio de sesión exitoso", HttpStatus.OK);
+//         } else {
+//             return new ResponseEntity<>("Credenciales inválidas", HttpStatus.UNAUTHORIZED);
+//         }
+//     }
+// }

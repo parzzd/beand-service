@@ -6,12 +6,9 @@ import org.springframework.data.repository.query.Param;
 
 import com.hampcode.bankingservice.model.entities.Recipe;
 
-import java.util.List;
 
-public interface RecipeRepository extends JpaRepository<Recipe, Long> {
-
-    @Query("SELECT r FROM Recipe r WHERE r.id =:userId")
-    List<Recipe> findConsumableRecipesForUser(@Param("userId") Long userId);
-
-
+public interface RecipeRepository extends JpaRepository<Recipe,Long>{
+    @Query("SELECT r from Recipe r where r.recipeName=:recipeName")
+    Recipe findByRecipeName(@Param("recipeName")String recipeName);
 }
+

@@ -1,5 +1,9 @@
 package com.hampcode.bankingservice.model.dto;
 
+import java.util.List;
+
+import com.hampcode.bankingservice.model.entities.Ingredient;
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -19,4 +23,5 @@ public class AccountRequestDTO {
     private String ownerEmail;
     @NotBlank(message = "La contraseña no puede estar vacía")
     private String password;
+    private List<Ingredient>notingredients;
 }

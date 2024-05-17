@@ -1,40 +1,37 @@
 package com.hampcode.bankingservice.model.entities;
-
-import java.util.List;
-
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.HashSet;
+import java.util.Set;
+
+@Data
 @Entity
 @Table(name = "recipes")
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
+
 public class Recipe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "Id")
     private Long id;
-    
-    @Column(name = "recipe_name", nullable = false)
+    @Column(name = "recipe_name",nullable = false)
     private String recipeName;
+    @Column(name = "description",nullable = false)
+    private String description;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "recipe_ingredient",
-        joinColumns = @JoinColumn(name = "recipe_id"),
-        inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
-    private List<Ingredient> ingredients;
+    @ManyToMany(fetch = FetchType.LAZY,cascade = {CascadeType.PERSIST})
+    @JoinTable(name = "ingredient_map",joinColumns = @JoinColumn(name="recipe_id"),inverseJoinColumns=@JoinColumn(name="ingredient_id"))
+    private Set<Ingredient> ingredients=new HashSet<>();
 
-    @Column(name = "recipe_description", nullable = false)
-    private String recipeDescription;
+
+    public void addIngredient(Ingredient ingredient) {
+        this.ingredients.add(ingredient);
+    }
+
+    public void removeIngredient(Ingredient ingredient) {
+        this.ingredients.remove(ingredient);    }
 }
