@@ -1,21 +1,24 @@
-// package com.hampcode.bankingservice.model.dto;
+package com.hampcode.bankingservice.model.dto;
 
-// import jakarta.validation.constraints.*;
-// import lombok.AllArgsConstructor;
-// import lombok.Data;
-// import lombok.NoArgsConstructor;
+import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-// import java.util.List;
+import java.util.Set;
 
-// import com.hampcode.bankingservice.model.entities.UserRestriction;
-
-// @Data
-// @NoArgsConstructor
-// @AllArgsConstructor
-// public class UserRequestDTO {
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class UserRequestDTO {
     
-//     private List<UserRestriction> restrictions;
-//     @NotBlank(message = "El correo electronico del titular no puede estar vacio")
-//     @Email
-//     private String ownerEmail;
-// }
+    
+    @NotBlank(message = "El correo electronico del titular no puede estar vacio")
+    @Email
+    private String ownerEmail;
+    
+    @NotBlank(message = "contraseña no puede ser nula")
+    private String ownerPassword;
+
+    private Set<String> restrictions;
+}

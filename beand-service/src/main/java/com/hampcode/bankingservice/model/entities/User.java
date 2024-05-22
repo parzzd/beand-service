@@ -1,23 +1,18 @@
 package com.hampcode.bankingservice.model.entities;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
-<<<<<<< Updated upstream
 import jakarta.persistence.CascadeType;
-=======
->>>>>>> Stashed changes
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-<<<<<<< Updated upstream
-import jakarta.persistence.OneToMany;
-=======
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
->>>>>>> Stashed changes
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -32,19 +27,23 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(name = "owner_email", nullable = false)
     private String ownerEmail;
+
     @Column(name = "owner_password", nullable = false)
     private String ownerPassword;
-<<<<<<< Updated upstream
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<UserRestriction> restrictions;
-=======
-    @ManyToMany
-    @JoinTable(name = "user_ingredient",
-        joinColumns = @JoinColumn(name="user_id"),
-        inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
-    private List<Ingredient> cannotConsumeIngredients;
 
->>>>>>> Stashed changes
+    @ManyToMany(cascade = {CascadeType.PERSIST},fetch = FetchType.LAZY)
+    @JoinTable(name = "user_not_ingredient",
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
+    private Set<Ingredient> cannotConsumeIngredients=new HashSet<>();
+    
+    public void addIngredient(Ingredient ingredient) {
+        this.cannotConsumeIngredients.add(ingredient);
+    }
+
+    public void removeIngredient(Ingredient ingredient) {
+        this.cannotConsumeIngredients.remove(ingredient);    }
 }

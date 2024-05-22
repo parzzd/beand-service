@@ -31,7 +31,6 @@ public class Recipe {
     public void addIngredient(Ingredient ingredient) {
         this.ingredients.add(ingredient);
     }
-
     public void removeIngredient(Ingredient ingredient) {
         this.ingredients.remove(ingredient);    }
 }
