@@ -18,5 +18,6 @@ public class RecipeRequestDTO {
     @NotBlank(message = "La receta debe tener una descripcion")
     @Pattern(regexp = "[a-zA-Z\s]+")
     private String description;
+    
     private Set<String> ingredients;
 }

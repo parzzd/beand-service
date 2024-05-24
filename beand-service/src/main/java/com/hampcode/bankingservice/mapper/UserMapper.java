@@ -1,5 +1,6 @@
 package com.hampcode.bankingservice.mapper;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -20,11 +21,13 @@ public class UserMapper {
         return modelMapper.map(userRequestDTO, User.class);
 
     }
-
     public UserResponseDTO convertToUserDTO(User user){
         return modelMapper.map(user, UserResponseDTO.class);
     }
-    
+    public List<UserResponseDTO> convertToListUserDTO(List<User> users){
+        return users.stream().map(this::convertToUserDTO).toList();
+    }
+
     public UserResponseDTO convertToUserDTOO(User user){
         UserResponseDTO dto=new UserResponseDTO();
         dto.setOwnerEmail(user.getOwnerEmail());
@@ -37,7 +40,7 @@ public class UserMapper {
                 ingredientDTO.setIngredientName(ingredient.getIngredientName());
                 return ingredientDTO;
             }).collect(Collectors.toSet());
-        dto.setRestrictions(ingredientDTOs);
+        dto.setIngredients(ingredientDTOs);
 
         return dto;
     }

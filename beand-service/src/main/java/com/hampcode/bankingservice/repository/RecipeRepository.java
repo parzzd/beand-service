@@ -10,5 +10,9 @@ import com.hampcode.bankingservice.model.entities.Recipe;
 public interface RecipeRepository extends JpaRepository<Recipe,Long>{
     @Query("SELECT r from Recipe r where r.recipeName=:recipeName")
     Recipe findByRecipeName(@Param("recipeName")String recipeName);
+    
+    
 }
+
+
 

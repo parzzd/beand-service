@@ -29,7 +29,7 @@ public class RecipeController {
         List<RecipeResponseDTO>recipes=recipeService.getAllRecipes();
         return new ResponseEntity<>(recipes,HttpStatus.OK);
     }
-    @GetMapping("/{recipeName}")
+    @GetMapping("/nombre/{recipeName}")
     public ResponseEntity<RecipeResponseDTO> getByRecipeName(@PathVariable String recipeName){
         RecipeResponseDTO recipes=recipeService.getByRecipeName(recipeName);
         return new ResponseEntity<>(recipes,HttpStatus.OK);
@@ -39,5 +39,12 @@ public class RecipeController {
         RecipeResponseDTO createrecipe=recipeService.createRecipeResponseDTO(recipeRequestDTO);
         return new ResponseEntity<>(createrecipe,HttpStatus.OK);
     }
+
+    @GetMapping("/{userId}")
+    public ResponseEntity<List<RecipeResponseDTO>> getByUserID(@PathVariable Long userId) {
+        List<RecipeResponseDTO> recipes = recipeService.getByUserID(userId);
+        return new ResponseEntity<>(recipes, HttpStatus.OK);
+    }
+
 
 }

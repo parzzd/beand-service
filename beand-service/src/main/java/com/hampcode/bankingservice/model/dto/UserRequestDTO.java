@@ -20,5 +20,5 @@ public class UserRequestDTO {
     @NotBlank(message = "contraseña no puede ser nula")
     private String ownerPassword;
 
-    private Set<String> restrictions;
+    private Set<String> ingredients;
 }

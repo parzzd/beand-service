@@ -6,13 +6,10 @@ import org.springframework.data.repository.query.Param;
 
 import com.hampcode.bankingservice.model.entities.User;
 
-import java.util.List;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("SELECT u from User u WHERE u.id=:userId")
-    List<User> findUsers(@Param("userId") Long userId);
-    
-
+    User findUser(@Param("userId") String userId);
 
 }

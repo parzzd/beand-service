@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 public class UserResponseDTO {
     String ownerEmail;
     String ownerPassword;
-    private Set<IngredientResponseDTO> restrictions;
+    private Set<IngredientResponseDTO> ingredients;
 
 }
