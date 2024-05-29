@@ -1,4 +1,4 @@
-package com.hampcode.bankingservice.model.entities;
+/*package com.hampcode.bankingservice.model.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -32,3 +32,4 @@ public class Notification {
     @JoinColumn(name = "source_publication_id", nullable = false)
     private Publication sourcePublication;
 }
+*/
