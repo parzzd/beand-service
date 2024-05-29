@@ -35,4 +35,12 @@ public class Appointment{
     @JoinColumn(name ="source_account_id",nullable = false)
     private User sourceUser;
     
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "nutritionist_id", nullable = false)
+    private Nutritionist nutritionist;
+
 }
