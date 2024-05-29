@@ -2,8 +2,6 @@ package com.hampcode.bankingservice.services;
 
 import java.util.List;
 
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -53,12 +51,15 @@ public class AccountService {
     @Transactional
     public AccountResponseDTO updateAccount(Long id, AccountRequestDTO accountRequestDTO) {
         Account account = accountRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Cuenta no encontrada con el número:" + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Cuenta no encontrada con el número: " + id));
 
         account.setTypeAccount(accountRequestDTO.getTypeAccount());
         account.setOwnerEmail(accountRequestDTO.getOwnerEmail());
 
         if (accountRequestDTO.getPassword() != null && !accountRequestDTO.getPassword().isEmpty()) {
+            if (!accountRequestDTO.getPassword().equals(accountRequestDTO.getConfirmPassword())) {
+                throw new IllegalArgumentException("Las contraseñas no coinciden");
+            }
             String encryptedPassword = encryptPassword(accountRequestDTO.getPassword());
             account.setPassword(encryptedPassword);
         }

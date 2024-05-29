@@ -1,7 +1,6 @@
 package com.hampcode.bankingservice.controllers;
 
 import java.util.List;
-import java.lang.String;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -49,9 +48,7 @@ public class AccountController {
         return new ResponseEntity<>(createdAccount, HttpStatus.CREATED);
     }
 
-
-
-    //http://localhost:8080/api/v1/accounts/4
+    //Recuperar contraseña
     @PutMapping("/{id}")
     public ResponseEntity<AccountResponseDTO> updateAccount(@PathVariable Long id,
                                                             @Validated @RequestBody AccountRequestDTO accountDTO) {

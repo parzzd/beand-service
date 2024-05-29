@@ -21,4 +21,7 @@ public class AccountRequestDTO {
     
     @NotBlank(message = "La contraseña no puede estar vacía")
     private String password;
+
+    @NotBlank(message = "La confirmación de contraseña no puede estar vacía")
+    private String confirmPassword;
 }
