@@ -38,6 +38,8 @@ public class AuthServiceTest {
         account.setTypeAccount("user");
         account.setOwnerEmail("ejemplo@upc.edu.pe");
         account.setPassword(passwordEncoder.encode("password123"));
+
+        
     }
     @Test
     public void testAuthenticateSuccess() {
