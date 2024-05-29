@@ -80,13 +80,13 @@ public class RecipeService {
            }
        }
 
-       // Save the new recipe
        newRecipe = recipeRepository.save(newRecipe);
 
        return recipeMapper.convertToRecipeDTO(newRecipe);
    }
     @Transactional
     public List<RecipeResponseDTO> getByUserID(Long userID) {
+        
         User user = userRepository.findById(userID)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
         
@@ -94,12 +94,12 @@ public class RecipeService {
         
         List<Recipe> recipes = recipeRepository.findAll();
 
-        List<Recipe> recetas = recipes.stream()
+        List<Recipe> recetas_permitidas = recipes.stream()
                 .filter(recipe -> recipe.getIngredients().stream()
                         .noneMatch(restricciones::contains))
                 .collect(Collectors.toList());
 
-        return recipeMapper.convertToListRecipeDTO(recetas);
+        return recipeMapper.convertToListRecipeDTO(recetas_permitidas);
     }
     
     
