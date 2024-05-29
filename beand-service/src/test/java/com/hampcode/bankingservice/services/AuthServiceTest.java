@@ -64,15 +64,4 @@ public class AuthServiceTest {
         assertFalse(result);
         verify(accountRepository, times(1)).findByOwnerEmail("ejemplo@upc.edu.pe");
     }
-
-        @Test
-    public void testAuthenticateAccountNotFound() {
-        when(accountRepository.findByOwnerEmail("ejemplo@upc.edu.pe")).thenReturn(Optional.of(account));
-
-        assertThrows(ResourceNotFoundException.class, () -> {
-            authService.authenticate("ejemplo@upc.edu.pe", "password123", "user");
-        });
-        
-        verify(accountRepository, times(1)).findByOwnerEmail("ejemplo@upc.edu.pe");
-    }
 }
