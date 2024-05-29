@@ -37,7 +37,7 @@ public class RecipeController {
     @PostMapping
     public ResponseEntity<RecipeResponseDTO> createRecipe(@RequestBody @Validated RecipeRequestDTO recipeRequestDTO){
         RecipeResponseDTO createrecipe=recipeService.createRecipeResponseDTO(recipeRequestDTO);
-        return new ResponseEntity<>(createrecipe,HttpStatus.OK);
+        return new ResponseEntity<>(createrecipe,HttpStatus.CREATED);
     }
 
     @GetMapping("/{userId}")
@@ -45,6 +45,10 @@ public class RecipeController {
         List<RecipeResponseDTO> recipes = recipeService.getByUserID(userId);
         return new ResponseEntity<>(recipes, HttpStatus.OK);
     }
-
+    @PostMapping("/cambiar")
+    public ResponseEntity<RecipeResponseDTO> changeByRecipeName(@RequestBody @Validated RecipeRequestDTO recipeRequestDTO){
+        RecipeResponseDTO newRecipe=recipeService.changeByRecipeName(recipeRequestDTO);
+        return new ResponseEntity<>(newRecipe,HttpStatus.CREATED);
+    }
 
 }
