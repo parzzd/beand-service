@@ -68,7 +68,7 @@ public class AccountService {
         return accountMapper.convertToDTO(account);
     }
 
-    private String encryptPassword(String password) {
+    public String encryptPassword(String password) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         return passwordEncoder.encode(password);
     }

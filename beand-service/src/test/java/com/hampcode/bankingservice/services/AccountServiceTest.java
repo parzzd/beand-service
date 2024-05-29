@@ -3,6 +3,7 @@ package com.hampcode.bankingservice.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -12,7 +13,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.hampcode.bankingservice.mapper.AccountMapper;
 import com.hampcode.bankingservice.model.dto.AccountRequestDTO;
@@ -20,7 +21,7 @@ import com.hampcode.bankingservice.model.dto.AccountResponseDTO;
 import com.hampcode.bankingservice.model.entities.Account;
 import com.hampcode.bankingservice.repository.AccountRepository;
 
-@SpringBootTest
+//SpringBootTest
 @ExtendWith(MockitoExtension.class)
 public class AccountServiceTest {
 
@@ -39,18 +40,19 @@ public class AccountServiceTest {
 
     @Test
     public void testCreateAccount() {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         AccountRequestDTO requestDTO = new AccountRequestDTO();
         requestDTO.setTypeAccount("user");
         requestDTO.setOwnerEmail("ejemplo@upc.edu.pe");
         requestDTO.setPassword("password123");
 
-        
+        String encryptedPassword = passwordEncoder.encode(requestDTO.getPassword());
 
         Account account = new Account();
         account.setId(1L);
         account.setTypeAccount(requestDTO.getTypeAccount());
         account.setOwnerEmail(requestDTO.getOwnerEmail());
-        account.setPassword(requestDTO.getPassword());
+        account.setPassword(encryptedPassword);
 
         when(accountMapper.convertToEntity(requestDTO)).thenReturn(account); 
         when(accountMapper.convertToDTO(account)).thenReturn(new AccountResponseDTO(account.getId(), account.getTypeAccount(), account.getOwnerEmail(), account.getPassword()));
@@ -61,7 +63,7 @@ public class AccountServiceTest {
         assertEquals(account.getId(), result.getId());
         assertEquals(account.getTypeAccount(), result.getTypeAccount());
         assertEquals(account.getOwnerEmail(), result.getOwnerEmail());
-        assertEquals(account.getPassword(), result.getPassword());
+        assertTrue(passwordEncoder.matches("password123", result.getPassword()));
 
 
         verify(accountMapper, times(1)).convertToEntity(requestDTO);  
