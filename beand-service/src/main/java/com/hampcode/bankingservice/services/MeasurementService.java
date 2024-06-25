@@ -36,7 +36,7 @@ public class MeasurementService {
     @Transactional
     public MeasurementResponseDTO createMeasurement(MeasurementRequestDTO measurementRequestDTO) {
         Measurement measurement = measurementMapper.convertToEntity(measurementRequestDTO);
-        measurement.setDate(LocalDate.now()); // Si deseas registrar la fecha actual
+        measurement.setDate(LocalDate.now()); 
         measurementRepository.save(measurement);
         return measurementMapper.convertToDTO(measurement);
     }
@@ -46,16 +46,13 @@ public class MeasurementService {
         Measurement measurement = measurementRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Medición no encontrada con el ID: " + id));
 
-        // Actualizar los campos de la medición con los valores del DTO
         measurement.setUserId(measurementRequestDTO.getUserId());
         measurement.setWeight(measurementRequestDTO.getWeight());
         measurement.setHeight(measurementRequestDTO.getHeight());
         measurement.setDate(measurementRequestDTO.getDate());
 
-        // Guardar la medición actualizada en el repositorio
         measurement = measurementRepository.save(measurement);
 
-        // Convertir la medición actualizada a un DTO de respuesta y devolverla
         return measurementMapper.convertToDTO(measurement);
     }
 
