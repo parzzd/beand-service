@@ -26,6 +26,7 @@ public class ResourceService {
         Resource resource=new Resource();
         resource.setResourceDescription(resourceRequestDTO.getResourceDescription());
         resource.setResourceName(resourceRequestDTO.getResourceName());
+        resource.setPhoto(resourceRequestDTO.getPhoto());
         resource=resourceRepository.save(resource);
         return resourceMapper.convertToResourceDTO(resource);
     }

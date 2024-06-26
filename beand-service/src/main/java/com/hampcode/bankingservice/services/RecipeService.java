@@ -38,13 +38,13 @@ public class RecipeService {
         return recipeMapper.convertToRecipeDTO(recipe);
     }
 
-
+    
     @Transactional
     public RecipeResponseDTO createRecipeResponseDTO(RecipeRequestDTO recipeRequestDTO) {
         Recipe recipe = new Recipe();
         recipe.setRecipeName(recipeRequestDTO.getRecipeName());
         recipe.setDescription(recipeRequestDTO.getDescription());
-
+        recipe.setPhoto(recipeRequestDTO.getPhoto());
         for (String ingredientName : recipeRequestDTO.getIngredients()) {
             Ingredient ingredient = ingredientRepository.findByIngredientName(ingredientName);
             if (ingredient == null) {

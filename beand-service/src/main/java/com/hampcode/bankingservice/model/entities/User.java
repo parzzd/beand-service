@@ -46,5 +46,6 @@ public class User {
     }
 
     public void removeIngredient(Ingredient ingredient) {
-        this.cannotConsumeIngredients.remove(ingredient);    }
+        this.cannotConsumeIngredients.remove(ingredient);    
+    }
 }

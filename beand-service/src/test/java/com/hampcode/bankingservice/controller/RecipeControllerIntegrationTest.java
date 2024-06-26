@@ -45,6 +45,7 @@ public class RecipeControllerIntegrationTest {
         ingredients.add("tomate");
         ingredients.add("cebolla");
         recipeRequestDTO.setIngredients(ingredients);
+
         mockMvc.perform(MockMvcRequestBuilders.post("/recipes").contentType(MediaType.APPLICATION_JSON)
         .content(asJsonString(recipeRequestDTO))).andExpect(MockMvcResultMatchers.status().isCreated());
     }

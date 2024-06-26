@@ -13,4 +13,5 @@ public class RecipeResponseDTO {
     private String recipeName;
     private String description;
     private Set<IngredientResponseDTO> ingredients;
+    private String photo;
 }

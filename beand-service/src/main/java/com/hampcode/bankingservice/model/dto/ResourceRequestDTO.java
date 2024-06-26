@@ -11,10 +11,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ResourceRequestDTO {
     @NotBlank(message = "debe de tener un nombre")
-    @Pattern(regexp = "[a-zA-Z]+")
+    @Pattern(regexp = "[a-zA-Z\s]+")
     private String resourceName;
 
     @NotBlank(message = "debe de tener una descripcion")
-    @Pattern(regexp = "[a-zA-Z]+")
+    @Pattern(regexp = "[a-zA-Z\s]+")
     private String resourceDescription;
+    private String photo;
+
 }

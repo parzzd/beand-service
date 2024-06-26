@@ -22,7 +22,8 @@ public class Recipe {
     private String recipeName;
     @Column(name = "description",nullable = false)
     private String description;
-
+    @Column(name="photo",nullable = false)
+    private String photo;
     @ManyToMany(fetch = FetchType.LAZY,cascade = {CascadeType.PERSIST})
     @JoinTable(name = "ingredient_map",joinColumns = @JoinColumn(name="recipe_id"),inverseJoinColumns=@JoinColumn(name="ingredient_id"))
     private Set<Ingredient> ingredients=new HashSet<>();

@@ -24,4 +24,6 @@ public class Resource {
     private String resourceName;
     @Column(name = "description")
     private String resourceDescription;
+    @Column(name="photo",nullable = false)
+    private String photo;
 }

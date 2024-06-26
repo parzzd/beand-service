@@ -113,7 +113,6 @@ class RecipeServiceApplicationTest {
 	//user story 12
     @Test
     public void testChangeByRecipeName() {
-        // Arrange
         RecipeRequestDTO recipeRequestDTO = new RecipeRequestDTO();
         recipeRequestDTO.setRecipeName("Lomo Saltado");
         recipeRequestDTO.setDescription("Nueva descripción");
@@ -138,7 +137,9 @@ class RecipeServiceApplicationTest {
         originalRecipe.addIngredient(tomate);
         originalRecipe.addIngredient(cebolla);
 
-        // Mocking repositories
+
+
+        
         when(recipeRepository.findByRecipeName("Lomo Saltado")).thenReturn(originalRecipe);
         when(ingredientRepository.findByIngredientName("tomate")).thenReturn(tomate);
         when(ingredientRepository.findByIngredientName("cebolla")).thenReturn(cebolla);
@@ -151,22 +152,18 @@ class RecipeServiceApplicationTest {
 
         when(recipeRepository.save(any(Recipe.class))).thenReturn(newRecipe);
 
-        // Mocking mapper
         RecipeResponseDTO recipeResponseDTO = new RecipeResponseDTO();
         recipeResponseDTO.setRecipeName("Lomo Saltado2");
         recipeResponseDTO.setDescription("Nueva descripción");
 
         when(recipeMapper.convertToRecipeDTO(any(Recipe.class))).thenReturn(recipeResponseDTO);
 
-        // Act
         RecipeResponseDTO result = recipeService.changeByRecipeName(recipeRequestDTO);
 
-        // Assert
         assertNotNull(result);
         assertEquals("Lomo Saltado2", result.getRecipeName());
         assertEquals("Nueva descripción", result.getDescription());
 
-        // Verify interactions
         verify(recipeRepository, times(1)).findByRecipeName("Lomo Saltado");
         verify(ingredientRepository, times(1)).findByIngredientName("tomate");
         verify(ingredientRepository, times(1)).findByIngredientName("cebolla");
